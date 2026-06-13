@@ -22,7 +22,7 @@ jobs:
           playwright install chromium
           
       - name: Запускаем парсер
-        run: python3 Try-ozon.py
+        run: python3 run_parser.py
         
       - name: Загружаем CSV
         uses: actions/upload-artifact@v4
