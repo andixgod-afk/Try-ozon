@@ -6,26 +6,11 @@ on:
 jobs:
   parse:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Скачиваем репозиторий
-        uses: actions/checkout@v4
-        
-      - name: Устанавливаем Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          
-      - name: Устанавливаем зависимости
-        run: |
-          pip install playwright
-          playwright install chromium
-          
+      - uses: actions/checkout@v4
       - name: Запускаем парсер
         run: python3 run_parser.py
-        
-      - name: Загружаем CSV
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: ozon-results
           path: ./*.csv
