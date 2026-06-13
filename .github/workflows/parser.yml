@@ -1,0 +1,31 @@
+name: Ozon Parser
+
+on:
+  workflow_dispatch:
+
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Скачиваем репозиторий
+        uses: actions/checkout@v4
+        
+      - name: Устанавливаем Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Устанавливаем зависимости
+        run: |
+          pip install playwright
+          playwright install chromium
+          
+      - name: Запускаем парсер
+        run: python3 Try-ozon.py
+        
+      - name: Загружаем CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: ozon-results
+          path: ./*.csv
